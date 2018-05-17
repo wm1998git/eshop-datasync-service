@@ -1,0 +1,30 @@
+server:
+  port: 8765 # 本服务所使用的端口号
+  
+eureka:
+  client:
+    service-url:
+      # defaultZone: http://localhost:8761/eureka/ # 指定将本微服务注册到的Eureka注册中心的地址
+      defaultZone: http://192.168.1.110:8761/eureka/ # 生产环境（决不要是localhost，否则在Eureka管理页面看不到本服务已注册上来）
+      
+spring:
+  application:
+    name: eshop-datasync-service # 自己要注册的微服务名称
+  datasource:          # 配置Druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    platform: mysql
+    # url: jdbc:mysql://localhost:3356/eshop?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC # 连接Win7本地的MySQL数据库
+    url: jdbc:mysql://192.168.1.103:3306/eshop?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC # 连接Win7本地的MySQL数据库
+    username: root
+    password: root
+    
+  rabbitmq: # 配置RabbitMQ的连接信息
+    # host: localhost
+    host: 192.168.1.103
+    port: 5672  # RabbitMQ监听的端口
+    username: rabbitadmin
+    password: 123456
+    
+feign:
+ hystrix:
+  enabled: true
